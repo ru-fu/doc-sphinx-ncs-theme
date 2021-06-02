@@ -1,8 +1,69 @@
 {% extends "sphinx_rtd_theme/layout.html" %}
+
+{%- set landing = meta and meta.purpose and meta.purpose == "landing" %}
+
+
 {% block scripts %}
   {{ super() }}
   <script type="text/javascript" src="{{ pathto('_static/js/ncs.js', 1) }}"></script>
 {% endblock %}
 {% block extrahead %}
   <link rel="shortcut icon" href="{{ pathto('_static/images/favicon.ico', 1) }}"/>
+{% endblock %}
+
+
+{% block extrabody %}
+
+ {%- if landing %}
+  <div id="banner" class="landing">
+ {%- else %}
+  <div id="banner">
+ {%- endif %}
+    <div id="nordiclogo">
+      <a href="../nrf/{{ pathto('landing') }}"><img src="{{ pathto('_static/images/nordic.svg', 1) }}" border="0"/></a>
+    </div>
+
+  <div id="producttitle">
+    {{ project }}
+  </div>
+
+          {%- include "searchbox.html" %}
+
+
+{%- if theme_display_version and meta and meta.purpose and meta.purpose == "landing"%}
+            {%- set nav_version = version %}
+            {%- if READTHEDOCS and current_version %}
+              {%- set nav_version = current_version %}
+            {%- endif %}
+            {%- if nav_version %}
+              <div class="version">
+                Select version: {{ nav_version }}
+              </div>
+            {%- endif %}
+          {%- endif %}
+
+
+  </div>
+
+<div class="wy-grid-for-nav">
+
+ {%- if not landing %}
+    {#- SIDE NAV, TOGGLES ON MOBILE #}
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+ {%- else %}
+    <nav class="nope"><div class="nope">
+ {%- endif %}
+
+
+<!--
+
+{% endblock %}
+
+
+{% block navigation %}
+-->
+ {%- if not landing %}
+ {{ super() }}
+ {%- endif %}
 {% endblock %}

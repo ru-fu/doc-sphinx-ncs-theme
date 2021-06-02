@@ -1,0 +1,5 @@
+
+
+{%- set landing = meta and meta.purpose and meta.purpose == "landing" %}
+
+{% if not landing %}{% extends "sphinx_rtd_theme/breadcrumbs.html" %}{% endif %}
